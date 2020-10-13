@@ -1,11 +1,8 @@
 import { User } from './../../../../models/user.model';
 import { UserService } from './../../../../services/user-service/user-service.service';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { RegisterServiceService } from './register-service.service';
-
-
 
 @Component({
   selector: 'app-register',
@@ -16,26 +13,38 @@ import { RegisterServiceService } from './register-service.service';
 export class RegisterComponent implements OnInit {
 
   registerForm: FormGroup;
-  user: User;
 
-  constructor(private registerServiceService: RegisterServiceService, private router: Router, private fromBuilder: FormBuilder) {
-
-
+  constructor(
+    private userService: UserService,
+    private router: Router ,
+    private fromBuilder: FormBuilder ) {
   }
 
   ngOnInit(): void {
     this.registerForm = this.fromBuilder.group({
-      username: ['', [Validators.required]],
+      roles: [[], [Validators.required]],
+      name: ['', [Validators.required]],
+      userName: ['', [Validators.required]],
       email: ['', [Validators.required]],
       password: ['', [Validators.required]],
      });
   }
+
   onRegister(): void {
-if(this.registerForm.invalid){
-  return;
-}
-  console.log(this.registerForm.value)
-   // this.user = new User(username, email, password);
-    //this.registerServiceService.onRegister(this.user);
+    if (this.registerForm.invalid){
+      return;
+    }
+    const user: User = {
+      role: this.registerForm.get('role').value,
+      email: this.registerForm.get('email').value,
+      userName: this.registerForm.get('userName').value,
+      password: this.registerForm.get('password').value,
+      name: this.registerForm.get('name').value,
+    };
+    this.userService.createUser(user).subscribe(result =>{
+      if (result) {
+        this.router.navigate(['login']);
+      }
+    });
   }
 }

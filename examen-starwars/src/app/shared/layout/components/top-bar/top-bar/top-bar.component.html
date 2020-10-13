@@ -8,10 +8,10 @@
     <ul class="navbar-nav mr-auto">
 
       <li class="nav-item">
-        <a class="nav-link" routerLink = "starships" >Starships</a>
+        <a class="nav-link" routerLink = "/starships" >Naves de Star Wars</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" routerLink = "about" >About</a>
+        <a class="nav-link" routerLink = "/about" >Acerca</a>
       </li>
     </ul>
 
@@ -20,7 +20,7 @@
         <a class="nav-link" >  <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item active "  >
-        <a class="nav-link"    >USUARIO<span class="sr-only">(current)</span></a>
+        <a class="nav-link"    >Hola, {{(authenticationService.currentUser$ | async)?.name}}<span class="sr-only">(current)</span></a>
       </li>
     </ul>
   </div>

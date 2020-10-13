@@ -3,26 +3,36 @@
         <div class="card">
             <div class="card-body">
                 <h1 class="text-center">Registrarse</h1>
-                <form formGroup ="registerForm" (ngSubmit)=" onRegister()" >
+                    <form [formGroup] ="registerForm">
+                      <div class="form-group">
+                        <label for="idUsernameRegister">Nombre:</label>
+                        <input type="text" id="idUsernameRegister" placeholder="Nombre" class="form-control" formControlName="name" />
+                    </div>
                     <div class="form-group">
-                        <label for="idUsernameRegister">Nombre de usuario</label>
-                        <input type="text" id="idUsernameRegister" placeholder="Nombre de usuario" class="form-control" formControlName="username" />
+                        <label for="idUsernameRegister">Nombre de usuario:</label>
+                        <input type="text" id="idUsernameRegister" placeholder="Inserte su nombre de usuario" class="form-control" formControlName="userName" />
                     </div>
 
                     <div class="form-group">
-                        <label for="idEmailRegister">Email</label>
-                        <input type="email" id="idEmailRegister" placeholder="Email" class="form-control" formControlName="email" />
+                        <label for="idEmailRegister">Correo:</label>
+                        <input type="email" id="idEmailRegister" placeholder="Inserte su correo" class="form-control" formControlName="email" />
                     </div>
                     <div class="form-group">
-                        <label for="idPassRegister">Password</label>
-                        <input type="password" id="idPassRegister" placeholder="Pass" class="form-control" formControlName="password" />
+                        <label for="idPassRegister">Contraseña:</label>
+                        <input type="password" id="idPassRegister" placeholder="Inserte su contraseña" class="form-control" formControlName="password" />
                     </div>
-                    <button type="submit"  class="btn btn-primary btn-block">Registrarse</button>
+                    <div class="form-group">
+                      <label for="idRoles">Role:</label>
+                      <select  id="idRoles"  class="form-control" formControlName="role" >
+                          <option value="Admin">Administrador</option>
+                          <option value="Guest">Invitado</option>
+                      </select>
+                  </div>
+                    <button type="submit"  class="btn btn-primary btn-block" (click)="onRegister()">Registrarse</button>
                     <div class="form-group mt-3">
-                        <a routerLink ="login" class="pointer decorationnone mb-3 " >Ya tienes cuenta? Login</a>
+                        <a routerLink ="/login" class="pointer decorationnone mb-3 " >Ya tienes cuenta? Login</a>
                     </div>
                 </form>
-                <h5>(to do)</h5>
             </div>
         </div>
     </div>

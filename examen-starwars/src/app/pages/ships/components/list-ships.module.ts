@@ -7,6 +7,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import {​​​​​MatDialogModule}​​​​​ from '@angular/material/dialog';
 import { SharedModule } from '../../../shared/shared.module';
 import { ListShipsRoutingModule } from './list-ships-routing.module';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
   declarations: [
@@ -19,8 +20,8 @@ import { ListShipsRoutingModule } from './list-ships-routing.module';
     ReactiveFormsModule,
     SharedModule,
     FormsModule,
-    ​​​​​MatDialogModule,
-    ListShipsRoutingModule
+    ListShipsRoutingModule,
+    NgxPaginationModule
   ],
 })
 

@@ -1,38 +1,45 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-
 import { Router } from '@angular/router';
 import { UserService } from '../../../../services/user-service/user-service.service';
-import { User } from '../../../../models/user.model';
+import { AuthenticationService } from '../../../../core/authentication/authentication.service';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
-  providers:[UserService]
+  providers: [UserService]
 })
 export class LoginComponent implements OnInit {
 
+  loginForm: FormGroup;
+  error: string;
 
-  loginForm = new FormGroup({
-
-    email: new FormControl(''),
-    password: new FormControl('')
-
-  });
-  users: User[];
-  usuario: User;
-
-  constructor(private router: Router) {
+  constructor(
+    private router: Router,
+    private authenticationService: AuthenticationService) {
   }
 
   ngOnInit(): void {
-
+    this.initForm();
   }
 
-   onLogin(): void {
-
+  onLogin(): void {
+    this.authenticationService.login(
+      this.loginForm.get('userName').value,
+      this.loginForm.get('password').value).subscribe(result => {
+          if (result){
+            this.router.navigate(['/starships']);
+          } else {
+              this.error = 'Email o contraseña incorrecta.';
+          }
+      });
   }
 
-
+  initForm(): void {
+    this.loginForm = new FormGroup({
+      userName: new FormControl(''),
+      password: new FormControl('')
+    });
+  }
 }

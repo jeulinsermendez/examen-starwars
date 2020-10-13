@@ -1,10 +1,12 @@
-<app-top-bar></app-top-bar>
 <div>
-  <button (click)= "makeAShip()">Crear nave</button>
+  <pagination-controls (pageChange)="pageChange($event)"></pagination-controls>
+  <button class="btn btn-primary m-2" (click)= "createShip()">Crear nave</button>
   <div class="container" *ngFor="let ship of (listShipsService.ships$ | async) | paginate: { itemsPerPage: 10, currentPage: currentPage, totalItems: listShipsService.totalItems }">
-    <app-ship [ship]= "ship"></app-ship>
+    <div class="btn pointer" (click)="editShip(ship)">
+      <app-ship [ship]= "ship"></app-ship>
+
+    </div>
+
   </div>
   <pagination-controls (pageChange)="pageChange($event)"></pagination-controls>
 </div>
-
-

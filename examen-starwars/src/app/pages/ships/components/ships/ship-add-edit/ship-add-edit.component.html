@@ -1,5 +1,61 @@
-<div [formGroup]="shipsForm">
-  <input type="text" formControlName="name" />
-  <input type="text" formControlName="model" />
-  <input type="file" formControlName="image" />
-</div>
+<div class="container">
+  <form class="form-group" [formGroup]="shipsForm">
+  <h4 class="mb-4">{{ data === null ? 'Añadir Nave' : 'Editar Nave'}}</h4>
+  <div class="row">
+  <div class="col">
+  <mat-form-field appearance="fill">
+  <mat-label>Nombre</mat-label>
+  <input matInput formControlName="name">
+  <mat-error *ngIf="shipsForm.get('name').hasError('required')">
+  El nombre es obligatorio
+  </mat-error>
+  </mat-form-field>
+  </div>
+  </div>
+  <div class="row">
+  <div class="col">
+  <mat-form-field appearance="fill">
+  <mat-label>Modelo</mat-label>
+  <input matInput formControlName="model" value="">
+  <mat-error *ngIf="shipsForm.get('model').hasError('required')">
+  El modelo es obligatorio
+  </mat-error>
+  </mat-form-field>
+  </div>
+  </div>
+
+  <div class="row">
+    <div class="col">
+    <mat-form-field appearance="fill">
+    <mat-label>Crew</mat-label>
+    <input matInput formControlName="crew" value="">
+    <mat-error *ngIf="shipsForm.get('crew').hasError('required')">
+    El crew es obligatorio
+    </mat-error>
+    </mat-form-field>
+    </div>
+    </div>
+  <div class="row">
+  <div class="col">
+  <label>
+  <span>Seleccionar Imagen</span>
+  <input #imageInput   type="file"
+  accept="image/*"
+  (change)="processFile(imageInput)">
+  </label>
+  </div>
+  </div>
+  <div class="row">
+    <div class="col">
+    <div *ngIf="shipsForm.get('image').value">
+      <img onerror="this.onerror=null;this.src='https://starwars-visualguide.com/assets/img/placeholder.jpg';" [src]="shipsForm.get('image').value" alt="" width="200px">
+    </div>
+    </div>
+  </div>
+  <div class="row">
+  <div class="col">
+  <button class="btn btn-primary p-2 button-save mt-4"  (click)="save(data)">{{ data === null ? 'Crear' : 'Editar'}}</button>
+  </div>
+  </div>
+  </form>
+  </div>

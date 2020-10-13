@@ -1,5 +1,8 @@
 import { ListShipsService } from './list-ships.service';
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { ShipAddEditComponent } from './ships/ship-add-edit/ship-add-edit.component';
+import { Ship } from '../../../models/ship.model';
 
 @Component({
   selector: 'app-list-ships',
@@ -11,7 +14,10 @@ export class ListShipsComponent implements OnInit {
 
   currentPage: number;
 
-  constructor(public listShipsService: ListShipsService) {
+  constructor(
+    public listShipsService: ListShipsService,
+    private matDialog: MatDialog
+    ) {
   }
 
   ngOnInit(): void {
@@ -28,8 +34,21 @@ export class ListShipsComponent implements OnInit {
     this.listShipsService.loadShips(page);
   }
 
-  makeAShip(): void {
+  createShip(): void {
+    const dialogRef = this.matDialog.open(ShipAddEditComponent, {
+      data: null
+    });
+    dialogRef.afterClosed (). subscribe ( result => {
+      this.listShipsService.createShip(result);
+    });
+  }
 
-
+  editShip(ship: Ship): void {
+    const dialogRef = this.matDialog.open(ShipAddEditComponent, {
+      data: ship
+    });
+    dialogRef.afterClosed (). subscribe ( result => {
+      this.listShipsService.editShip(result);
+    });
   }
 }

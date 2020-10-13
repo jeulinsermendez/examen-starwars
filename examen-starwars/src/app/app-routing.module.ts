@@ -1,6 +1,8 @@
+import { AuthenticationGuard } from './core/guards/authentication.guard';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { LayoutComponent } from './pages/layout/layout.component';
+import { NavigationGuard } from './core/guards/navigation.guard';
 
 const routes: Routes = [
   {
@@ -22,11 +24,16 @@ const routes: Routes = [
     children: [
       {
         path: 'starships',
-        loadChildren: () => import('./pages/ships/components/list-ships.module').then(x => x.ListShipsModule)
+        loadChildren: () => import('./pages/ships/components/list-ships.module').then(x => x.ListShipsModule),
+        canActivate: [AuthenticationGuard]
       },
       {
         path: 'about',
-        loadChildren: () => import('./pages/about/about/about.module').then(x => x.AboutModule)
+        loadChildren: () => import('./pages/about/about/about.module').then(x => x.AboutModule),
+        canActivate: [AuthenticationGuard, NavigationGuard],
+        data: {
+          roles: ['Admin']
+        }
       }
     ]
   }

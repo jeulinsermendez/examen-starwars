@@ -8,8 +8,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class UserService {
 
-  userLogin: User = null;
-  constructor( private http: HttpClient ) { }
+  constructor() { }
 
   getUsers(): Observable<User[]> {
 
@@ -18,17 +17,17 @@ export class UserService {
   }
 
   editUser(user: User): void{
-    let users = JSON.parse(localStorage.getItem('users')) as User[];
-    let foundUser = users.find(x => x.username === user.username);
-    let foundUserIndex = foundUser;
+    const users = JSON.parse(localStorage.getItem('users')) as User[];
+    const foundUser = users.find(x => x.userName === user.userName);
+    const foundUserIndex = foundUser;
     foundUser.email = user.email;
     foundUser.password = user.password;
     users[users.indexOf(foundUserIndex)] = foundUser;
   }
 
-  deleteUser(username: string): Observable<boolean>{
+  deleteUser(userName: string): Observable<boolean>{
     let users = JSON.parse(localStorage.getItem('users')) as User[];
-    users = users.filter(z => z.username !== username);
+    users = users.filter(z => z.userName !== userName);
     localStorage.setItem('users', JSON.stringify(users));
 
     return of(true);
@@ -51,12 +50,6 @@ export class UserService {
       localStorage.setItem('users', JSON.stringify(usersParsed));
     }
     return of(true);
-  }
-
-  existsUser(username: string): Observable<boolean> {
-    const users = localStorage.getItem('users');
-    const usersParsed = JSON.parse(users) as User[];
-    return of(usersParsed.find(x => x.username === username) !== null);
   }
 
 }
