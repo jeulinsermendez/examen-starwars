@@ -41,7 +41,7 @@ export class RegisterComponent implements OnInit {
       password: this.registerForm.get('password').value,
       name: this.registerForm.get('name').value,
     };
-    this.userService.createUser(user).subscribe(result =>{
+    this.userService.createUser(user).subscribe(result => {
       if (result) {
         this.router.navigate(['login']);
       }

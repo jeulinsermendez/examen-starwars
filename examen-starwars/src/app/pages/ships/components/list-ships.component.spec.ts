@@ -13,8 +13,8 @@ describe('ListShipsComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ ListShipsComponent ],
-      imports:[HttpClientTestingModule,​​​​​MatDialogModule, NgxPaginationModule],
-      providers:[RouterModule ]
+      imports: [HttpClientTestingModule,​​​​​MatDialogModule, NgxPaginationModule],
+      providers: [RouterModule ]
     })
     .compileComponents();
   });

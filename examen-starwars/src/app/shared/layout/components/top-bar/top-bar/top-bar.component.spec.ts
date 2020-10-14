@@ -12,7 +12,7 @@ describe('TopBarComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [ TopBarComponent ],
       providers: [MatDialogModule],
-      imports:[RouterTestingModule]
+      imports: [RouterTestingModule]
     })
     .compileComponents();
   });

@@ -11,10 +11,10 @@ describe('ShipAddEditComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ ShipAddEditComponent ],
-      imports:[ReactiveFormsModule, FormsModule, ​​​​​MatDialogModule],
-      providers:[
+      imports: [ReactiveFormsModule, FormsModule, ​​​​​MatDialogModule],
+      providers: [
         { provide: MatDialogRef, useValue: {} },
-	      { provide: MAT_DIALOG_DATA, useValue: [] },
+        { provide: MAT_DIALOG_DATA, useValue: [] },
       ]
     })
     .compileComponents();
