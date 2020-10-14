@@ -1,23 +1,35 @@
 import { ApiResponse } from './../../../models/api-response.model';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable, timer } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { Ship } from 'src/app/models/ship.model';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../../environments/environment.prod';
+import { shareReplay } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ListShipsService {
 
+  currentPage: number;
   totalItems: number;
   private ships: BehaviorSubject<Ship[]> = new BehaviorSubject<Ship[]>([]);
   ships$ = this.ships.asObservable();
+  cachedShips$: Map<number, Observable<ApiResponse>> = new Map<number, Observable<ApiResponse>>();
 
-  constructor( private http: HttpClient) { }
+  constructor( private http: HttpClient) {
+   /* timer(0, 3000).subscribe(_ => {
+      this.cachedShips$ = this.getShipsFromApi(this.currentPage);
+    });*/
+    //this.cachedShips$ = this.getShipsFromApi(this.currentPage);
+   }
 
   loadShips(page: number ): void {
-    this.http.get<ApiResponse>(environment.urlAPI + 'starships/?page=' + page).subscribe(
+    this.currentPage = page;
+    if (this.cachedShips$ === undefined ) {
+      this.cachedShips$ = this.getShipsFromApi(this.currentPage);
+    }
+    this.cachedShips$.subscribe(
       apiResponse => {
         this.totalItems =  Number.parseInt(apiResponse.count, null);
         apiResponse.results.forEach(ship => {
@@ -27,6 +39,17 @@ export class ListShipsService {
         });
         this.ships.next(apiResponse.results);
       });
+   }
+
+   getShipsFromApi(page: number): Observable<ApiResponse> {
+    return this.http.get<ApiResponse>(environment.urlAPI + 'starships/?page=' + page)
+    .pipe(
+      shareReplay({
+        bufferSize: 1,
+        refCount: true,
+        windowTime: 3000
+      })
+    );
    }
 
    createShip(ship: Ship): void {
