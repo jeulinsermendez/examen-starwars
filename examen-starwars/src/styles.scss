@@ -1,0 +1,73 @@
+/* You can add global styles to this file, and also import other style files */
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+html,
+body {
+  height: 100%;
+}
+html{
+  font-family: Arial, Helvetica, sans-serif;
+
+  font-size: 16px;
+}
+
+a {
+  color: black;
+  transition: all 200ms;
+
+}
+a:hover{
+  color: rgb(183, 128, 54);
+}
+
+
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.btn-primary {
+  color: #fff;
+  background-color:rgb(183, 128, 54);
+  border-color: rgb(183, 128, 54);
+}
+.btn-primary:hover {
+  color: #fff;
+  background-color:rgb(183, 128, 54);
+  border-color: rgb(183, 128, 54);
+}
+
+
+.nav-link {
+  display: block;
+  padding: .5rem 1rem;
+  color: black;
+}
+.navbar-brand {
+  display: inline-block;
+  padding-top: .3125rem;
+  padding-bottom: .3125rem;
+  margin-right: 1rem;
+  font-size: 1.25rem;
+  line-height: inherit;
+  white-space: nowrap;
+  color: gray;
+}
+
+.navbar {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  padding: .5rem 1rem;
+  box-shadow: 0 0px 0px 0 rgb(0 0 0 / 0%), 0 0px 6px 0 rgba(0, 0, 0, 0.19);
+}
+.ngx-pagination .current {
+  padding: 0.1875rem 0.625rem;
+  background: rgb(183, 128, 54) !important;
+  color: #fefefe;
+  cursor: default;
+}
