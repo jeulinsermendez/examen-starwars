@@ -1,11 +1,14 @@
-
-        <div class="pointer card-header ">Modelo: {{ship?.model}} </div>
+<div class="card ship-card">
+  <div class="pointer card-header ">Modelo: {{ship?.model}} </div>
         <div class="card-body">
-           <img [src]="ship?.image" width="300px"
+           <img [src]="ship?.image" width="180px" height="200px"
               onerror="this.onerror=null;this.src='https://starwars-visualguide.com/assets/img/placeholder.jpg';"
             >
           <h4 class="card-title"> {{ship?.name}} </h4>
           <p class="card-text">Crew: {{ship?.crew}} </p>
         </div>
+
+</div>
+
 
 

@@ -15,7 +15,7 @@ import { Ship } from '../../../models/ship.model';
 describe('ListShipsComponent', () => {
   let component: ListShipsComponent;
   let fixture: ComponentFixture<ListShipsComponent>;
-  let ship: Ship = {
+  const ship: Ship = {
     name: 'nave1',
     model: 'model1',
     id: 'id1',
