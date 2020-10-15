@@ -16,7 +16,7 @@ export class ListShipsComponent implements OnInit {
 
   constructor(
     public listShipsService: ListShipsService,
-    private matDialog: MatDialog
+    public matDialog: MatDialog
     ) {
   }
 

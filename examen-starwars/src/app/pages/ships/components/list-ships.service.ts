@@ -10,11 +10,11 @@ import { shareReplay } from 'rxjs/operators';
 })
 export class ListShipsService {
   totalItems: number;
-  private ships: BehaviorSubject<Ship[]> = new BehaviorSubject<Ship[]>([]);
+  ships: BehaviorSubject<Ship[]> = new BehaviorSubject<Ship[]>([]);
   ships$ = this.ships.asObservable();
   cachedShips$: Map<number, Observable<ApiResponse>> = new Map<number, Observable<ApiResponse>>();
 
-  constructor(private http: HttpClient) {
+  constructor(public http: HttpClient) {
     timer(0, 300000).subscribe(_ => {
       this.cachedShips$.clear();
     });
@@ -36,7 +36,7 @@ export class ListShipsService {
       });
   }
 
-  getShipsFromApi(page: number): Observable<ApiResponse> {
+ private getShipsFromApi(page: number): Observable<ApiResponse> {
     return this.http.get<ApiResponse>(environment.urlAPI + 'starships/?page=' + page)
       .pipe(
         shareReplay({
@@ -48,8 +48,9 @@ export class ListShipsService {
   }
 
   createShip(ship: Ship): void {
-    const maxShipsId = this.ships.getValue().map(x => Number.parseInt(x.id, null))
-      .reduce((a, b) => Math.max(a, b));
+    const allShips = this.ships.getValue().map(x => Number.parseInt(x.id, null));
+    const maxShipsId =  allShips.length > 0 ?
+      allShips.reduce((a, b) => Math.max(a, b)) : 0;
     ship.id = (maxShipsId + 1).toString();
     let ships: Ship[] = [];
     ships.push(ship);
