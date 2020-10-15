@@ -36,6 +36,5 @@ describe('RegisterComponent', () => {
     spyOn(component.userService, 'createUser').and.returnValue(new Observable<boolean>(x => x.next(true)));
     component.onRegister();
     expect(component.userService.createUser).toHaveBeenCalled();
-
   });
 });
