@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg ">
-  <a class="navbar-brand" routerLink= "/home" >Star Wars</a>
+  <a class="navbar-brand" routerLink= "/starships" >Star Wars</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -22,6 +22,7 @@
       <li class="nav-item active "  >
         <a class="nav-link"    >Hola, {{(authenticationService.currentUser$ | async)?.name}}<span class="sr-only">(current)</span></a>
       </li>
+      <button type="button" class="btn btn-light ml-5" (click)="logout()">Salir</button>
     </ul>
   </div>
 </nav>

@@ -26,4 +26,10 @@ describe('TopBarComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should logout', () => {
+    spyOn(component.authenticationService, 'logout').and.callThrough();
+    component.logout();
+    expect(component.authenticationService.logout).toHaveBeenCalled();
+  });
 });

@@ -54,6 +54,7 @@ export class ListShipsService {
     ship.id = (maxShipsId + 1).toString();
     let ships: Ship[] = [];
     ships.push(ship);
+    this.ships.getValue().splice(-1, 1);
     ships = ships.concat(this.ships.getValue());
     this.ships.next(ships);
   }

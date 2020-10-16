@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { LayoutComponent } from './pages/layout/layout.component';
 import { NavigationGuard } from './core/guards/navigation.guard';
+import { ErrorComponent } from './pages/error/error.component';
 
 const routes: Routes = [
   {
@@ -10,6 +11,7 @@ const routes: Routes = [
     redirectTo: 'starships',
     pathMatch: 'full'
   },
+
   {
     path: 'login',
     loadChildren: () => import('./pages/login/components/login/login.module').then(x => x.LoginModule)
@@ -22,6 +24,10 @@ const routes: Routes = [
     path: '',
     component: LayoutComponent,
     children: [
+      {
+        path: 'error',
+        component: ErrorComponent
+      },
       {
         path: 'starships',
         loadChildren: () => import('./pages/ships/components/list-ships.module').then(x => x.ListShipsModule),

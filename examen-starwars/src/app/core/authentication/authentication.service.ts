@@ -15,7 +15,9 @@ export class AuthenticationService {
   constructor(
     private userService: UserService,
     private router: Router
-    ) { }
+    ) {
+      this.currentUser.next(this.getUserLogged());
+     }
 
   login(userName: string, password: string): Observable<boolean> {
     return new Observable<boolean>(observable => {
@@ -23,6 +25,7 @@ export class AuthenticationService {
         const foundUser = users.find(x => x.userName === userName && x.password === password);
         if ( foundUser !== undefined) {
           this.currentUser.next(foundUser);
+          this.saveUserSession(foundUser);
           observable.next(true);
         } else {
           observable.next(false);
@@ -30,6 +33,31 @@ export class AuthenticationService {
         observable.complete();
       });
     });
+  }
+
+  saveUserSession(user: User): void {
+    if (user  === undefined || user === null) {
+      return;
+    }
+    const currentUser = localStorage.getItem('currentUser');
+    if (currentUser !== null || currentUser !== undefined) {
+      localStorage.removeItem('currentUser');
+      localStorage.setItem('currentUser', JSON.stringify(user));
+    }
+  }
+
+  getUserLogged(): User {
+    const userLogged = localStorage.getItem('currentUser');
+    if (userLogged === null || userLogged === undefined){
+      return null;
+    }
+    return JSON.parse(userLogged);
+  }
+
+  logout(): void{
+    localStorage.removeItem('currentUser');
+    this.currentUser.next(null);
+    this.router.navigate(['/login']);
   }
 
   isAuthenticated(): Observable<boolean> {

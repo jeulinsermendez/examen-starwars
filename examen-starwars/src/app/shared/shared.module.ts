@@ -4,6 +4,7 @@ import { TopBarComponent } from './layout/components/top-bar/top-bar/top-bar.com
 import { RouterModule } from '@angular/router';
 import { MatDialogModule } from '@angular/material/dialog';
 import {​​​​​MatInputModule}​​​​​ from '@angular/material/input';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [TopBarComponent],
@@ -11,7 +12,8 @@ import {​​​​​MatInputModule}​​​​​ from '@angular/material/in
     CommonModule,
     RouterModule,
     MatDialogModule,
-    ​​​​​MatInputModule
+    ​​​​​MatInputModule,
+    MatSnackBarModule
   ],
   exports: [
     TopBarComponent,
