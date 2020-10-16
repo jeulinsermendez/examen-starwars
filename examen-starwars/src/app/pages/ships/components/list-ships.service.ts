@@ -59,6 +59,9 @@ export class ListShipsService {
   }
 
   editShip(ship: Ship): void {
+    if (ship === undefined){
+      return ;
+    }
     const foundShipIndex = this.ships.getValue().findIndex(x => x.id === ship.id);
     this.ships.getValue()[foundShipIndex].name = ship.name;
     this.ships.getValue()[foundShipIndex].model = ship.model;

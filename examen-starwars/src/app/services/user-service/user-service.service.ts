@@ -13,7 +13,11 @@ export class UserService {
   getUsers(): Observable<User[]> {
 
     const users = localStorage.getItem('users');
-    return of(JSON.parse(users) as User[]);
+    if (users === undefined || users === null ) {
+      return of([]);
+    } else {
+      return of(JSON.parse(users) as User[]);
+    }
   }
 
   editUser(user: User): void{
